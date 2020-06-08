@@ -1,5 +1,14 @@
+# -*- coding: utf-8 -*-
+#################################################################################
+# Author      : Kelvzxu (<https://kltech-intl.odoo.com/>)
+# Copyright(c): 2020-kltech-intl.
+# All Rights Reserved.
+#
+#
+# This program is copyright property of the author mentioned above.
+# You can`t redistribute it and/or modify it.
+#################################################################################
 from odoo import api, fields, models
-
 
 class ResUsers( models.Model ):
     _inherit = "res.users"
