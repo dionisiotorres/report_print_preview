@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+#################################################################################
+# Author      : Kelvzxu (<https://kltech-intl.odoo.com/>)
+# Copyright(c): 2020-kltech-intl.
+# All Rights Reserved.
+#
+#
+# This program is copyright property of the author mentioned above.
+# You can`t redistribute it and/or modify it.
+#################################################################################
+from odoo import api, fields, models
+
+class ResUsers( models.Model ):
+    _inherit = "res.users"
+
+    preview_print = fields.Boolean(
+        string  = "Preview print",
+        default = True
+    )
+
+    automatic_printing = fields.Boolean(
+        srting = "Automatic printing"
+    )
+
+    def preview_reload(self):
+        return {
+            "type": "ir.actions.client", 
+            "tag": "reload"
+        }
+
+    def preview_print_save(self):
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload_context"
+        }
+
+    def __init__(self, pool, cr):
+
+        init_res = super(ResUsers, self).__init__(pool, cr)
+        type(self).SELF_WRITEABLE_FIELDS = list(self.SELF_WRITEABLE_FIELDS)
+        type(self).SELF_WRITEABLE_FIELDS.extend(["preview_print", "automatic_printing"])
+        type(self).SELF_READABLE_FIELDS = list(self.SELF_READABLE_FIELDS)
+        type(self).SELF_READABLE_FIELDS.extend(["preview_print", "automatic_printing"])
+
+        return init_res
+        
